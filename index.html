@@ -769,24 +769,25 @@
 
 <script>
 // ══ Splash → Login transition ══
-window.addEventListener('load', () => {
-    // بعد انتهاء شريط التحميل (2s للشريط + 1.2s تأخير = 3.4s إجمالاً)
-    setTimeout(() => {
+// ══ Splash → Login transition ══
+function showLogin() {
+    try {
         const splash = document.getElementById('splash');
         const loginCard = document.getElementById('login-card');
+        if (!splash || !loginCard) return;
         splash.style.transition = 'opacity .5s, transform .5s';
         splash.style.opacity = '0';
         splash.style.transform = 'scale(1.05)';
         setTimeout(() => {
             splash.style.display = 'none';
             loginCard.style.display = 'flex';
-            loginCard.style.animation = 'cardReveal .6s cubic-bezier(.22,1,.36,1)';
         }, 500);
-    }, 3600);
-});
+    } catch(e) {}
+}
+setTimeout(showLogin, 3500);
 
 // ══ Timezone ══
-document.getElementById('tz-val').textContent = Intl.DateTimeFormat().resolvedOptions().timeZone || 'N/A';
+try { document.getElementById('tz-val').textContent = Intl.DateTimeFormat().resolvedOptions().timeZone || 'N/A'; } catch(e) {}
 
 // ══ تغيير لون الـ accent ══
 function setAccent(color, glow, el) {
@@ -843,4 +844,6 @@ async function fetchIPInfo() {
         const r = await fetch('https://ipapi.co/json/', { signal: AbortSignal.timeout(5000) });
         const d = await r.json();
         return { ip: d.ip||'---', country: (d.country_name||'---')+' '+(d.country_code||'') };
-    
+    } catch {
+        try {
+            const r2 = await fet
