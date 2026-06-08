@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>m_•♕meroufel</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="manifest" href="#" id="mrf-manifest">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23111'/><text y='.9em' font-size='90' x='50%' text-anchor='middle'>🔥</text></svg>">
+<meta name="theme-color" content="#ff6b2b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MRF Technology">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+:root{--or:#ff6b2b;--bg:#111;--c:#1a1a1a;--b:#2a2a2a;--t:#f0ebe4;--t2:#777;--gn:#00c853;--rd:#ff3d00;--yw:#ffd600;}
+html,body{height:100%;background:var(--bg);color:var(--t);font-family:'Cairo',sans-serif;overflow:hidden;}
+
+/* SPLASH */
+#SPL{position:fixed;inset:0;z-index:999;background:#0a0a0f;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;transition:opacity .5s;}
+#SPL.hide{opacity:0;pointer-events:none;}
+.spl-logo{font-family:'Cairo',sans-serif;font-size:2.2rem;font-weight:900;letter-spacing:4px;background:linear-gradient(135deg,#ff6b2b,#ffb347);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:splPulse 1.2s ease-in-out infinite alternate;}
+.spl-sub{font-size:.55rem;letter-spacing:6px;color:rgba(255,179,71,.5);font-family:monospace;margin-top:6px;text-transform:uppercase;}
+.spl-bar{width:120px;height:2px;background:rgba(255,107,43,.15);border-radius:2px;margin-top:28px;overflow:hidden;}
+.spl-fill{height:100%;width:0%;background:linear-gradient(90deg,#ff6b2b,#ffb347);border-radius:2px;animation:splLoad 1.8s ease forwards;}
+@keyframes splPulse{from{opacity:.6}to{opacity:1}}
+@keyframes splLoad{0%{width:0%}60%{width:75%}100%{width:100%}}
+/* SCROLL TOP */
+#scrollTop{position:fixed;bottom:82px;left:16px;width:36px;height:36px;background:var(--or);border:none;border-radius:50%;color:#111;font-size:1rem;cursor:pointer;z-index:40;opacity:0;pointer-events:none;transition:opacity .3s;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 12px rgba(255,107,43,.4);}
+#scrollTop.show{opacity:1;pointer-events:all;}
+/* FOOTER */
+.mrf-footer{text-align:center;padding:20px 0 8px;font-size:.52rem;color:rgba(255,255,255,.18);letter-spacing:3px;font-family:monospace;}
+.mrf-footer span{color:rgba(255,107,43,.4);}
+/* INSTALL BANNER */
+#instBanner{position:fixed;bottom:70px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#1a1a1a,#222);border:1px solid rgba(255,107,43,.3);border-radius:8px;padding:12px 16px;display:flex;align-items:center;gap:12px;z-index:60;box-shadow:0 4px 20px rgba(0,0,0,.5);width:min(320px,90vw);animation:slideUp .4s ease;}
+@keyframes slideUp{from{transform:translateX(-50%) translateY(20px);opacity:0}to{transform:translateX(-50%) translateY(0);opacity:1}}
+.inst-txt{flex:1;font-size:.72rem;line-height:1.5;}
+.inst-txt b{color:var(--or);}
+.inst-btn{background:var(--or);color:#111;border:none;padding:8px 14px;border-radius:4px;font-weight:900;font-size:.72rem;cursor:pointer;font-family:'Cairo',sans-serif;white-space:nowrap;}
+.inst-close{background:none;border:none;color:var(--t2);cursor:pointer;font-size:1rem;padding:2px 6px;}
+/* WELCOME */
+#W{position:fixed;inset:0;z-index:50;background:var(--bg);display:flex;flex-direction:column;justify-content:flex-end;padding:36px 24px 56px;}
+.w-sm{font-size:.55rem;letter-spacing:5px;color:var(--or);margin-bottom:16px;font-family:monospace;}
+.w-big{font-size:clamp(2.6rem,11vw,4rem);font-weight:900;line-height:1;margin-bottom:6px;cursor:pointer;user-select:none;}
+.w-big b{color:var(--or);}
+.w-line{width:44px;height:3px;background:var(--or);margin-bottom:18px;}
+.w-sub{font-size:.8rem;color:var(--t2);margin-bottom:36px;line-height:1.6;}
+.w-go{display:inline-flex;align-items:center;gap:10px;padding:14px 28px;background:var(--or);color:#111;border:none;cursor:pointer;border-radius:4px;font-weight:900;font-size:.95rem;font-family:'Cairo',sans-serif;}
+.w-go:active{opacity:.85;}
+
+/* APP */
+#A{display:none;position:fixed;inset:0;flex-direction:column;z-index:1;}
+
+/* HEADER */
+.hd{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;background:var(--c);border-bottom:1px solid var(--b);flex-shrink:0;}
+.hd-l{display:flex;align-items:center;gap:10px;}
+.hd-sq{width:30px;height:30px;background:var(--or);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:.85rem;cursor:pointer;user-select:none;flex-shrink:0;}
+.hd-name{font-size:.78rem;font-weight:700;font-family:monospace;}
+
+/* BURGER */
+.burger{display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:4px;}
+.burger span{width:22px;height:2px;background:var(--t);border-radius:2px;display:block;transition:all .25s;}
+.burger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
+.burger.open span:nth-child(2){opacity:0;}
+.burger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
+
+/* DRAWER MENU */
+#drawer{
+  position:fixed;top:0;right:-100%;width:min(260px,80vw);height:100%;
+  background:var(--c);border-left:1px solid var(--b);z-index:300;
+  transition:right .25s ease;display:flex;flex-direction:column;
+  padding-top:60px;
+}
+#drawer.open{right:0;}
+#drawer-overlay{display:none;position:fixed;inset:0;z-index:290;background:rgba(0,0,0,.5);}
+#drawer-overlay.on{display:block;}
+.dr-item{
+  display:flex;align-items:center;gap:12px;
+  padding:15px 20px;border-bottom:1px solid var(--b);
+  cursor:pointer;font-size:.88rem;font-weight:700;
+  transition:background .15s;
+  border:none;background:none;color:var(--t);width:100%;text-align:right;
+  font-family:'Cairo',sans-serif;
+}
+.dr-item:active{background:var(--b);}
+.dr-item.on{color:var(--or);}
+.dr-item svg{width:18px;height:18px;stroke:currentColor;flex-shrink:0;}
+.dr-close{position:absolute;top:16px;left:16px;background:none;border:none;color:var(--t2);font-size:1.2rem;cursor:pointer;padding:4px;}
+
+/* PAGE TITLE */
+.pg-title{padding:14px 16px 0;font-size:.55rem;letter-spacing:4px;color:var(--or);font-family:monospace;opacity:.7;}
+
+/* PAGES */
+.pages{flex:1;overflow:hidden;position:relative;}
+.pg{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;padding:12px 14px 24px;opacity:0;pointer-events:none;transition:opacity .18s;scrollbar-width:thin;scrollbar-color:rgba(255,107,43,.15) transparent;}
+.pg.on{opacity:1;pointer-events:all;}
+
+/* CARDS */
+.card{background:var(--c);border:1px solid var(--b);border-radius:4px;margin-bottom:10px;overflow:hidden;}
+.card.hl{border-right:3px solid var(--or);}
+.card.hl-gn{border-right:3px solid var(--gn);}
+.card.hl-rd{border-right:3px solid var(--rd);}
+.card.hl-yw{border-right:3px solid var(--yw);}
+.card-hd{display:flex;align-items:center;justify-content:space-between;padding:11px 13px;border-bottom:1px solid var(--b);}
+.card-t{font-size:.82rem;font-weight:700;display:flex;align-items:center;gap:7px;}
+.card-bd{padding:12px 13px;}
+
+/* ROW */
+.row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--b);font-size:.73rem;}
+.row:last-child{border-bottom:none;}
+.rk{color:var(--t2);}
+.rv{font-family:monospace;font-size:.64rem;font-weight:700;color:var(--or);max-width:55%;text-align:left;word-break:break-all;}
+.rv.g{color:var(--gn);}
+.rv.y{color:var(--yw);}
+.rv.r{color:var(--rd);}
+
+/* LINK */
+.lnk{display:flex;align-items:center;justify-content:space-between;padding:12px 13px;border-radius:4px;margin-bottom:8px;text-decoration:none;color:var(--t);font-weight:700;font-size:.82rem;background:var(--c);border:1px solid var(--b);transition:background .15s;}
+.lnk:active{background:var(--b);}
+.lnk.hl{border-right:3px solid var(--or);}
+.lnk-l{display:flex;align-items:center;gap:10px;}
+.lnk-ic{width:34px;height:34px;border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.95rem;}
+.lnk-sub{font-size:.62rem;color:var(--t2);margin-top:1px;font-weight:400;}
+
+/* STAB */
+.stb{display:flex;border:1px solid var(--b);border-radius:4px;overflow:hidden;margin-bottom:12px;}
+.sbt{flex:1;padding:10px;border:none;background:transparent;color:var(--t2);cursor:pointer;font-weight:700;font-size:.76rem;font-family:'Cairo',sans-serif;transition:all .18s;border-left:1px solid var(--b);}
+.sbt:first-child{border-left:none;}
+.sbt.on{background:var(--or);color:#111;}
+
+/* CHIP */
+.chip{display:inline-flex;padding:2px 8px;border-radius:2px;font-size:.52rem;font-family:monospace;font-weight:700;}
+.cp-or{background:rgba(255,107,43,.13);color:var(--or);border:1px solid rgba(255,107,43,.2);}
+.cp-gn{background:rgba(0,200,83,.1);color:var(--gn);border:1px solid rgba(0,200,83,.18);}
+.cp-rd{background:rgba(255,61,0,.1);color:var(--rd);border:1px solid rgba(255,61,0,.18);}
+.cp-yw{background:rgba(255,214,0,.1);color:var(--yw);border:1px solid rgba(255,214,0,.18);}
+
+/* TOGGLE */
+.tog{width:40px;height:22px;background:var(--b);border-radius:22px;cursor:pointer;position:relative;border:none;flex-shrink:0;transition:background .2s;}
+.tog.on{background:var(--or);}
+.tog::after{content:'';position:absolute;top:3px;right:3px;width:14px;height:14px;background:white;border-radius:50%;transition:transform .2s;}
+.tog.on::after{transform:translateX(-18px);}
+
+/* SL */
+.sl{font-size:.48rem;letter-spacing:4px;color:var(--or);opacity:.6;margin:14px 0 7px;font-family:monospace;}
+
+/* TIMELINE */
+.tl{padding:4px 0;}
+.tli{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--b);}
+.tli:last-child{border-bottom:none;}
+.tl-left{display:flex;flex-direction:column;align-items:center;flex-shrink:0;}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--or);flex-shrink:0;margin-top:3px;box-shadow:0 0 6px rgba(255,107,43,.4);}
+.dot.old{background:var(--b);box-shadow:none;border:2px solid #444;}
+.dot.beta{background:var(--rd);}
+.line{flex:1;width:1px;background:var(--b);margin-top:4px;}
+.tl-v{font-family:monospace;font-size:.58rem;font-weight:900;color:var(--or);margin-bottom:2px;}
+.tl-v.old{color:var(--t2);}
+.tl-v.beta{color:var(--rd);}
+.tl-t{font-size:.82rem;font-weight:700;margin-bottom:2px;}
+.tl-d{font-size:.68rem;color:var(--t2);line-height:1.4;}
+
+/* SVC */
+.svc{background:var(--or);color:#111;border-radius:4px;padding:16px;margin-bottom:10px;}
+.svc-t{font-family:monospace;font-size:.75rem;font-weight:900;margin-bottom:5px;letter-spacing:1px;}
+.svc-d{font-size:.76rem;opacity:.72;line-height:1.4;margin-bottom:11px;}
+.svc-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:#111;color:var(--or);border-radius:3px;font-weight:700;font-size:.78rem;text-decoration:none;font-family:'Cairo',sans-serif;}
+
+/* COMPLAINT */
+.cmp{background:var(--c);border:1px solid var(--b);border-right:3px solid var(--rd);border-radius:4px;padding:13px;margin-bottom:10px;}
+.cmp-t{font-size:.8rem;font-weight:700;margin-bottom:4px;}
+.cmp-d{font-size:.72rem;color:var(--t2);line-height:1.5;margin-bottom:8px;}
+.cmp a{font-size:.75rem;font-weight:700;color:var(--rd);text-decoration:none;display:inline-flex;align-items:center;gap:5px;}
+
+/* HELP */
+.help{background:var(--c);border:1px solid var(--b);border-right:3px solid #38bdf8;border-radius:4px;padding:13px;margin-bottom:10px;}
+.help-t{font-size:.8rem;font-weight:700;margin-bottom:4px;}
+.help-d{font-size:.72rem;color:var(--t2);line-height:1.5;margin-bottom:8px;}
+.help a{font-size:.75rem;font-weight:700;color:#38bdf8;text-decoration:none;display:inline-flex;align-items:center;gap:5px;}
+
+/* PRAYER */
+.prayer{background:var(--c);border:1px solid var(--b);border-right:3px solid var(--gn);border-radius:4px;margin-bottom:10px;overflow:hidden;}
+
+/* EMPTY */
+.empty{text-align:center;padding:16px;color:var(--t2);font-size:.75rem;border:1px dashed var(--b);border-radius:3px;}
+
+/* ISTIGHFAR POPUP */
+.ist-pop{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:rgba(0,200,83,.95);color:#fff;padding:12px 20px;border-radius:8px;font-size:.88rem;font-weight:700;z-index:9999;pointer-events:none;opacity:0;transition:opacity .4s;direction:rtl;white-space:nowrap;}
+.ist-pop.show{opacity:1;}
+
+
+/* ACCORDION */
+.acc-hd{display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:11px 0;border-bottom:1px solid var(--b);user-select:none;}
+.acc-hd:last-of-type{border-bottom:none;}
+.acc-arrow{font-size:.8rem;transition:transform .25s;display:inline-block;color:var(--or);}
+.acc-body{display:none;padding:8px 0 4px;}
+.acc-body.open{display:block;}
+.acc-feat{display:flex;align-items:flex-start;gap:6px;font-size:.7rem;color:var(--t2);padding:4px 0;}
+.acc-feat::before{content:"◆";color:var(--or);font-size:.45rem;margin-top:4px;flex-shrink:0;}
+
+/* NOTIFICATION */
+.notif-btn{position:relative;cursor:pointer;background:none;border:none;padding:4px;}
+.notif-btn svg{width:20px;height:20px;stroke:var(--t2);}
+.notif-dot{position:absolute;top:2px;left:2px;width:7px;height:7px;background:var(--rd);border-radius:50%;display:none;}
+.notif-dot.on{display:block;}
+#notif-panel{
+  display:none;position:fixed;top:55px;left:10px;right:10px;
+  background:var(--c);border:1px solid var(--b);border-radius:6px;
+  z-index:400;max-height:70vh;overflow-y:auto;
+  box-shadow:0 8px 24px rgba(0,0,0,.6);
+}
+#notif-panel.on{display:block;}
+.notif-hd{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid var(--b);}
+.notif-hd-t{font-weight:700;font-size:.82rem;}
+.notif-clr{font-size:.62rem;color:var(--or);cursor:pointer;background:none;border:none;font-family:'Cairo',sans-serif;}
+.notif-item{display:flex;gap:10px;padding:11px 14px;border-bottom:1px solid var(--b);align-items:flex-start;}
+.notif-item:last-child{border-bottom:none;}
+.notif-item.unread{background:rgba(255,107,43,.04);}
+.notif-ic{width:32px;height:32px;border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.9rem;}
+.notif-txt .nt{font-size:.78rem;font-weight:700;margin-bottom:2px;}
+.notif-txt .ns{font-size:.66rem;color:var(--t2);}
+.notif-empty{text-align:center;padding:20px;color:var(--t2);font-size:.76rem;}
+
+
+/* ACCORDION */
+.acc-item{border-bottom:1px solid var(--b);padding:2px 0;}
+.acc-hd{display:flex;justify-content:space-between;align-items:center;padding:10px 4px;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;}
+.acc-hd:active{background:rgba(255,255,255,.03);}
+.acc-arr{font-size:.7rem;color:var(--or);transition:transform .2s;flex-shrink:0;}
+.acc-body{padding:6px 4px 10px 4px;}
+.feat{font-size:.7rem;color:var(--t2);padding:3px 0;display:flex;align-items:center;gap:6px;}
+
+/* NOTIF BELL */
+#notif-bell{position:relative;cursor:pointer;padding:4px;}
+#notif-bell svg{width:20px;height:20px;stroke:var(--t2);}
+#notif-count{position:absolute;top:0;right:0;width:14px;height:14px;background:var(--rd);border-radius:50%;font-size:.45rem;font-family:monospace;font-weight:900;color:white;display:none;align-items:center;justify-content:center;}
+#notif-count.on{display:flex;}
+#notif-panel{display:none;position:fixed;top:56px;left:14px;right:14px;background:var(--c);border:1px solid var(--b);border-radius:6px;z-index:400;box-shadow:0 8px 24px rgba(0,0,0,.5);max-height:60vh;overflow-y:auto;}
+#notif-panel.on{display:block;}
+.np-hd{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-bottom:1px solid var(--b);}
+.np-t{font-weight:700;font-size:.82rem;}
+.np-cl{font-size:.7rem;color:var(--or);cursor:pointer;font-family:monospace;}
+.notif-item{display:flex;gap:10px;padding:11px 14px;border-bottom:1px solid var(--b);}
+.notif-item:last-child{border-bottom:none;}
+.notif-item.unread{background:rgba(255,107,43,.04);}
+.ni-ic{font-size:1.1rem;flex-shrink:0;margin-top:2px;}
+.ni-t{font-size:.78rem;font-weight:700;margin-bottom:2px;}
+.ni-d{font-size:.65rem;color:var(--t2);}
+
+/* DESKTOP */
+@media(min-width:768px){
+  body{background:#0a0a0a;}
+  #W,#A{max-width:420px;left:50%;right:auto;transform:translateX(-50%);border-right:1px solid #1e1e1e;border-left:1px solid #1e1e1e;}
+  #AM,#drawer{max-width:420px;left:50%;right:auto;transform:translateX(-50%);}
+  #drawer{right:auto !important;left:50%;transform:translateX(50%) !important;}
+  #drawer.open{transform:translateX(50%) !important;}
+}
+</style>
+</head>
+<body>
+
+<!-- SPLASH -->
+<div id="SPL">
+  <div class="spl-logo">MRF Technology</div>
+  <div class="spl-sub">loading experience</div>
+  <div class="spl-bar"><div class="spl-fill"></div></div>
+</div>
+
+<!-- INSTALL BANNER -->
+<div id="instBanner" style="display:none;">
+  <div class="inst-txt"><b>MRF Technology</b><br>ثبّت التطبيق على شاشتك الرئيسية</div>
+  <button class="inst-btn" onclick="installPWA()">تثبيت</button>
+  <button class="inst-close" onclick="document.getElementById('instBanner').style.display='none'">✕</button>
+</div>
+
+<!-- SCROLL TOP -->
+<button id="scrollTop" onclick="scrollAppTop()" title="للأعلى">↑</button>
+
+<!-- WELCOME -->
+<div id="W">
+  <div class="w-sm">UPDATE V2.3 PRO ♕ • 2026</div>
+  <div style="font-family:'Cairo',sans-serif;font-size:1.6rem;font-weight:900;letter-spacing:3px;background:linear-gradient(135deg,#ff6b2b,#ffb347);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-align:center;padding:10px 0;filter:drop-shadow(0 0 12px rgba(255,107,43,.5));">MRF Technology</div><div class="w-big" onclick="st()" style="cursor:pointer;user-select:none;">m_•<b>♕</b><br>meroufel</div>
+  <div class="w-line"></div>
+  <div class="w-sub">ألعاب • تطبيقات • أحداث حصرية<br>نساعدك في سكربتات وتصاميم</div>
+  <button class="w-go" onclick="goIn()">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    ابدأ
+  </button>
+</div>
+
+<!-- DRAWER OVERLAY -->
+<div id="drawer-overlay" onclick="closeDrawer()"></div>
+
+<!-- DRAWER MENU -->
+<div id="drawer">
+  <button class="dr-close" onclick="closeDrawer()">✕</button>
+  <button class="dr-item on" id="dr0" onclick="go(0)">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    المنزل
+  </button>
+  <button class="dr-item" id="dr1" onclick="go(1)">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+    الأحداث
+  </button>
+  <button class="dr-item" id="dr2" onclick="go(2)">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    الإعدادات
+  </button>
+  <button class="dr-item" id="dr3" onclick="go(3)">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-.08-4.29"/></svg>
+    التحديثات
+  </button>
+  <button class="dr-item" id="dr4" onclick="go(4)">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    عن المطور
+  </button>
+</div>
+
+<!-- APP -->
+<div id="A">
+  <div class="hd">
+    <div class="hd-l">
+      <div class="hd-sq" id="sq" onclick="showPage('home')" style="background:none;padding:0;overflow:hidden;"><div style="font-family:'Cairo',sans-serif;font-size:1.6rem;font-weight:900;letter-spacing:3px;background:linear-gradient(135deg,#ff6b2b,#ffb347);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-align:center;padding:10px 0;filter:drop-shadow(0 0 12px rgba(255,107,43,.5));">MRF Technology</div></div>
+      <div class="hd-name" onclick="showPage('home')" style="cursor:pointer;">m_•♕meroufel</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div id="notif-bell" onclick="toggleNotif()" style="position:relative;cursor:pointer;padding:4px;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--t2)" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <div id="notif-count" style="position:absolute;top:0;right:0;width:14px;height:14px;background:var(--rd);border-radius:50%;font-size:.45rem;font-family:monospace;font-weight:900;color:white;display:flex;align-items:center;justify-content:center;">3</div>
+      </div>
+      <div class="burger" id="burger" onclick="openDrawer()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+
+<!-- NOTIF PANEL -->
+<div id="notif-panel">
+  <div class="notif-hd"><span class="notif-hd-t">🔔 الإشعارات</span><button class="notif-clr" onclick="clearNotifs()">مسح الكل</button></div>
+  <div id="notif-list"></div>
+</div>
+
+  <div class="pages">
+
+    <!-- 0: HOME -->
+    <div class="pg on" id="p0">
+      <div class="pg-title">المنزل</div>
+
+      <!-- HELP NOTE -->
+      <div style="text-align:center;margin-bottom:12px;"><div style="font-family:'Cairo',sans-serif;font-size:1.6rem;font-weight:900;letter-spacing:3px;background:linear-gradient(135deg,#ff6b2b,#ffb347);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-align:center;padding:10px 0;filter:drop-shadow(0 0 12px rgba(255,107,43,.5));">MRF Technology</div></div>
+
+      <!-- TABS -->
+      <div class="stb">
+        <button class="sbt on" id="bg" onclick="tb('g')">🎮 Gaming</button>
+        <button class="sbt" id="ba" onclick="tb('a')">📱 Apps</button>
+      </div>
+
+      <!-- GAMING -->
+      <div id="TG">
+        <a href="https://www.mediafire.com/file/pvzi0fp0906g584/GTA+SA.apk/file" class="lnk hl">
+          <div class="lnk-l"><div class="lnk-ic" style="background:rgba(230,126,34,.15);">🚗</div><div><div>GTA San Andreas</div><div class="lnk-sub">تحميل APK</div></div></div>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" opacity=".3"><path d="m15 18-6-6 6-6"/></svg>
+        </a>
+        <a href="https://www.mediafire.com/file/yz3uhvs45a6bvoe/gtasa_OBB_ANDROJUNGLE.COM.zip/file" class="lnk hl">
+          <div class="lnk-l"><div class="lnk-ic" style="background:rgba(211,84,0,.13);">📦</div><div><div>GTA SA — OBB</div><div class="lnk-sub">ملف البيانات</div></div></div>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" opacity=".3"><path d="m15 18-6-6 6-6"/></svg>
+        </a>
+        <a href="https://an1.com/7291-supreme-duelist-stickman-mod.html" class="lnk hl">
+          <div class="lnk-l"><div class="lnk-ic" style="background:rgba(255,107,43,.13);">🥊</div><div><div>Stickman Duelist</div><div class="lnk-sub">MOD APK — مجاني</div></div></div>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" opacity=".3"><path d="m15 18-6-6 6-6"/></svg>
+        </a>
+        <a href="https://gringo-xp.en.malavida.com/android/" class="lnk hl">
+          <div class="lnk-l"><div class="lnk-ic" style="background:rgba(0,200,83,.13);">🎮</div><div><div>Gringo XP</div><div class="lnk-sub">تحميل APK</div></div></div>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" opacity=".3"><path d="m15 18-6-6 6-6"/></svg>
+        </a>
+        <a href="https://an1.com/7361-minecraft-mods.html" class="lnk hl">
+          <div class="lnk-l"><div class="lnk-ic" style="background:rgba(101,163,13,.13);">⛏️</div><div><div>Minecraft Mods</div><div class="lnk-sub">an1.com — مجاني</div></div></div>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" opacity=".3"><path d="m15 18-6-6 6-6"/></svg>
+        </a>
+        <a href="https://score-hero-mod.fr.malavida.com/android/" class="lnk hl">
+          <div class="lnk-l"><div class="lnk-ic" style="background:rgba(56,189,248,.13);">⚽</div><div><div>Score Hero MOD</div><div class="lnk-sub">APK معدّل</div></div></div>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" opacity=".3"><path d="m15 18-6-6 6-6"/></svg>
+        </a>
+        <div style="background:var(--c);border:1px solid var(--b);border-right:3px solid var(--rd);border-radius:4px;padding:12px 13px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;">
+          <div class="lnk-l"><div class="lnk-ic" style="background:rgba(255,61,0,.13);">🔥</div><div><div>FF Zit</div><div class="lnk-sub">يحتاج VIP — قريباً ♕</div></div></div>
+          <span class="chip cp-yw">VIP</span>
+        </div>
+        <a href="https://www.apkmirror.com/apk/garena-international-i/free-fire-the-flash/free-fire-the-flash-1-26-1-release/" class="lnk hl">
+          <div class="lnk-l"><div class="lnk-ic" style="background:rgba(255,61,0,.13);">🔥</div><div><div>Free Fire: Lost Treasure</div><div class="lnk-sub">v1.26.1 — Android 4.0.3+</div></div></div>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" opacity=".3"><path d="m15 18-6-6 6-6"/></svg>
+        </a>
+        <a href="https://www.apkmirror.com/apk/garena-international-i/free-fire/" class="lnk hl">
+          <div class="lnk-l"><div class="lnk-ic" style="background:rgba(255,214,0,.13);">🎮</div><div><div>Free Fire 2017 (كلاسيك)</div><div class="lnk-sub">APKMirror — نسخة قديمة</div></div></div>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" opacity=".3"><path d="m15 18-6-6 6-6"/></svg>
+        </a>
+      </div>
+
+      <!-- APPS -->
+      <div id="TA" style="display:none;">
+        <a href="https://honista.com/" class="lnk hl">
+          <div class="lnk-l"><div class="lnk-ic" style="background:rgba(188,24,136,.15);">📸</div><div><div>Honista</div><div class="lnk-sub">Instagram معدّل</div></div></div>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" opacity=".3"><path d="m15 18-6-6 6-6"/></svg>
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=sleeptrakcer.sleeprecorder.sleepapp.sleep" class="lnk hl">
+          <div class="lnk-l"><div class="lnk-ic" style="background:rgba(99,102,241,.15);">🌙</div><div><div>Sleep Tracker Pro</div><div class="lnk-sub">تتبع جودة النوم</div></div></div>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" opacity=".3"><path d="m15 18-6-6 6-6"/></svg>
+        </a>
+        <a href="https://t.wemuslim.com/isqygDdQ" class="lnk hl">
+          <div class="lnk-l"><div class="lnk-ic" style="background:rgba(0,200,83,.13);">🕌</div><div><div>WeMuslim</div><div class="lnk-sub">أذان • قبلة • قرآن</div></div></div>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" opacity=".3"><path d="m15 18-6-6 6-6"/></svg>
+        </a>
+        <a href="https://www.apkmirror.com" class="lnk hl">
+          <div class="lnk-l"><div class="lnk-ic" style="background:rgba(56,189,248,.12);">📦</div><div><div>APKMirror</div><div class="lnk-sub">مصدر APKs موثوق</div></div></div>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" opacity=".3"><path d="m15 18-6-6 6-6"/></svg>
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.transsion.phoenix" target="_blank" class="lnk hl">
+          <div class="lnk-l"><div class="lnk-ic" style="background:rgba(255,140,0,.15);">🔥</div><div><div>Phoenix Browser</div><div class="lnk-sub">متصفح سريع وخفيف</div></div></div>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" opacity=".3"><path d="m15 18-6-6 6-6"/></svg>
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.jetstartgames.chess" target="_blank" class="lnk hl">
+          <div class="lnk-l"><div class="lnk-ic" style="background:rgba(255,255,255,.07);">♟️</div><div><div>Chess</div><div class="lnk-sub">لعبة الشطرنج</div></div></div>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" opacity=".3"><path d="m15 18-6-6 6-6"/></svg>
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.github.android" target="_blank" class="lnk hl">
+          <div class="lnk-l"><div class="lnk-ic" style="background:rgba(255,255,255,.07);">🐙</div><div><div>GitHub</div><div class="lnk-sub">إدارة مشاريعك من الهاتف</div></div></div>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" opacity=".3"><path d="m15 18-6-6 6-6"/></svg>
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.blockmansoft.blockmanGo" target="_blank" class="lnk hl">
+          <div class="lnk-l"><div class="lnk-ic" style="background:rgba(56,189,248,.15);">🧊</div><div><div>Blockman Go</div><div class="lnk-sub">ألعاب متعددة</div></div></div>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" opacity=".3"><path d="m15 18-6-6 6-6"/></svg>
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.dts.freefireth" target="_blank" class="lnk hl">
+          <div class="lnk-l"><div class="lnk-ic" style="background:rgba(255,61,0,.15);">🔥</div><div><div>Free Fire</div><div class="lnk-sub">Battle Royale</div></div></div>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" opacity=".3"><path d="m15 18-6-6 6-6"/></svg>
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.pubg.imobile" target="_blank" class="lnk hl">
+          <div class="lnk-l"><div class="lnk-ic" style="background:rgba(255,214,0,.15);">🎯</div><div><div>PUBG Mobile</div><div class="lnk-sub">Battle Royale</div></div></div>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" opacity=".3"><path d="m15 18-6-6 6-6"/></svg>
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.sololearn" target="_blank" class="lnk hl">
+          <div class="lnk-l"><div class="lnk-ic" style="background:rgba(99,102,241,.15);">📚</div><div><div>SoloLearn</div><div class="lnk-sub">تعلم البرمجة مجاناً</div></div></div>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" opacity=".3"><path d="m15 18-6-6 6-6"/></svg>
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.cerdillac.trebedit" target="_blank" class="lnk hl">
+          <div class="lnk-l"><div class="lnk-ic" style="background:rgba(255,107,43,.15);">✂️</div><div><div>TrebEdit</div><div class="lnk-sub">محرر HTML للموبايل</div></div></div>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" opacity=".3"><path d="m15 18-6-6 6-6"/></svg>
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.termux" target="_blank" class="lnk hl">
+          <div class="lnk-l"><div class="lnk-ic" style="background:rgba(0,200,83,.15);">💻</div><div><div>Termux</div><div class="lnk-sub">Terminal Linux على الهاتف</div></div></div>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" opacity=".3"><path d="m15 18-6-6 6-6"/></svg>
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=cn.wps.moffice_eng" target="_blank" class="lnk hl">
+          <div class="lnk-l"><div class="lnk-ic" style="background:rgba(255,61,0,.12);">📄</div><div><div>WPS Office</div><div class="lnk-sub">Word • Excel • PDF</div></div></div>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" opacity=".3"><path d="m15 18-6-6 6-6"/></svg>
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=ru.zdevs.zarchiver" target="_blank" class="lnk hl">
+          <div class="lnk-l"><div class="lnk-ic" style="background:rgba(56,189,248,.12);">🗜️</div><div><div>ZArchiver</div><div class="lnk-sub">فك ضغط الملفات</div></div></div>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" opacity=".3"><path d="m15 18-6-6 6-6"/></svg>
+        </a>
+        <a href="https://cashloot.app/r/703367" target="_blank" class="lnk hl" style="border-right:3px solid var(--gn);">
+          <div class="lnk-l"><div class="lnk-ic" style="background:rgba(0,200,83,.15);">💰</div><div><div>Cash Rewards</div><div class="lnk-sub">العب واكسب مال حقيقي!</div></div></div>
+          <span class="chip cp-gn">مجاني</span>
+        </a>
+      </div>
+
+      <!-- PRAYER TIMES -->
+      <div class="prayer">
+        <div class="card-hd"><div class="card-t">🌙 أوقات الصلاة — سيدي بلعباس</div><span class="chip cp-gn" id="hijri">جاري...</span></div>
+        <div class="card-bd" style="padding:10px 12px;">
+          <div class="row"><span class="rk">الفجر</span><span class="rv g">5:48 AM</span></div>
+          <div class="row"><span class="rk">الشروق</span><span class="rv g" id="pt-sr">—</span></div>
+          <div class="row"><span class="rk">الظهر</span><span class="rv g" id="pt-zh">—</span></div>
+          <div class="row"><span class="rk">العصر</span><span class="rv g" id="pt-as">—</span></div>
+          <div class="row"><span class="rk">المغرب</span><span class="rv g" id="pt-mg">—</span></div>
+          <div class="row"><span class="rk">العشاء</span><span class="rv g" id="pt-is">—</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1: EVENTS -->
+    <div class="pg" id="p1">
+      <div class="pg-title">الأحداث</div>
+      <div class="card hl-yw">
+        <div class="card-hd"><div class="card-t">♕ VIP</div><span class="chip cp-yw">قريباً</span></div>
+        <div class="card-bd">
+          <div style="font-size:.76rem;color:var(--t2);margin-bottom:10px;line-height:1.6;">محتوى حصري وميزات خاصة لأعضاء VIP — قريباً من <strong style="color:var(--yw);">MRF Technology</strong></div>
+          <div style="background:rgba(255,214,0,.07);border:1px solid rgba(255,214,0,.18);border-radius:3px;padding:10px;font-size:.68rem;color:var(--t2);line-height:1.6;">
+            <div style="color:var(--yw);font-weight:700;margin-bottom:4px;">🎁 مميزات VIP:</div>
+            <div>◆ الوصول لـ FF Zit حصرياً</div>
+            <div>◆ محتوى مميز قبل الجميع</div>
+            <div>◆ شارة ♕ VIP في ملفك</div>
+          </div>
+        </div>
+      </div>
+      <div class="card hl-rd">
+        <div class="card-hd"><div class="card-t">🎁 Giftway</div><span class="chip cp-rd">غير نشط</span></div>
+        <div class="card-bd"><div class="empty">لا توجد أحداث نشطة</div></div>
+      </div>
+    </div>
+
+    <!-- 2: SETTINGS -->
+    <div class="pg" id="p2">
+      <div class="pg-title">الإعدادات</div>
+      <div class="sl">المظهر</div>
+      <div class="card">
+        <div class="card-bd" style="padding:10px 12px;">
+          <div class="row"><span class="rk">الوضع الداكن / الفاتح</span><div class="tog on" id="modeT" onclick="toggleMode(this)"></div></div>
+          <div class="row"><span class="rk">الحركة</span><div class="tog on" onclick="this.classList.toggle('on')"></div></div>
+          <div class="row" style="flex-direction:column;align-items:flex-start;gap:8px;border-bottom:none;padding-bottom:2px;">
+            <span class="rk">لون التمييز</span>
+            <div style="display:flex;gap:7px;flex-wrap:wrap;margin-top:2px;">
+              <div style="width:24px;height:24px;border-radius:50%;background:#ff6b2b;cursor:pointer;border:3px solid white;" onclick="aC('#ff6b2b',this)"></div>
+              <div style="width:24px;height:24px;border-radius:50%;background:#38bdf8;cursor:pointer;border:3px solid transparent;" onclick="aC('#38bdf8',this)"></div>
+              <div style="width:24px;height:24px;border-radius:50%;background:#a855f7;cursor:pointer;border:3px solid transparent;" onclick="aC('#a855f7',this)"></div>
+              <div style="width:24px;height:24px;border-radius:50%;background:#10b981;cursor:pointer;border:3px solid transparent;" onclick="aC('#10b981',this)"></div>
+              <div style="width:24px;height:24px;border-radius:50%;background:#ef4444;cursor:pointer;border:3px solid transparent;" onclick="aC('#ef4444',this)"></div>
+              <div style="width:24px;height:24px;border-radius:50%;background:#ffd600;cursor:pointer;border:3px solid transparent;" onclick="aC('#ffd600',this)"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sl">النظام</div>
+      <div class="card">
+        <div class="card-bd" style="padding:10px 12px;">
+          <div class="row"><span class="rk">الإصدار</span><span class="chip cp-or">UPDATE V2.3 PRO ♕</span></div>
+          <div class="row"><span class="rk">عدد زياراتك</span><span class="chip cp-gn" id="visitCount">—</span></div>
+          <div class="row"><span class="rk">آخر زيارة</span><span id="lastVisit" style="font-size:.65rem;color:var(--t2);">—</span></div>
+          <div class="row"><span class="rk">الأمان</span><span class="chip cp-gn">محمي ✓</span></div>
+          <div class="row"><span class="rk">مسح الكاش</span><button onclick="clrC()" style="background:rgba(255,61,0,.1);border:1px solid rgba(255,61,0,.2);color:var(--rd);font-size:.54rem;padding:3px 9px;border-radius:2px;cursor:pointer;font-family:monospace;">مسح</button></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3: UPDATES -->
+    <div class="pg" id="p3">
+      <div class="pg-title">التحديثات</div>
+      <div class="svc">
+        <div class="svc-t">🛠 هل تريد خدمة؟</div>
+        <div class="svc-d">سكربتات وتصاميم احترافية — تواصل معنا</div>
+        <a href="https://d-mrf.github.io/mrf-technology/" class="svc-btn">🌐 الموقع الرسمي</a>
+      </div>
+      <div class="cmp">
+        <div class="cmp-t">⚠️ إبلاغ عن مشكلة</div>
+        <div class="cmp-d">واجهت مشكلة؟ أرسل لنا تقريراً مباشرة وسنتواصل معك في أقرب وقت</div>
+        <a href="javascript:void(0)" onclick="openBugReport()">إرسال تقرير المشكلة ←</a>
+      </div>
+
+      <!-- BUG REPORT MODAL -->
+      <div id="BRM" style="display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.9);align-items:center;justify-content:center;padding:20px;">
+        <div style="width:min(320px,94vw);background:var(--c);border:1px solid var(--rd);border-radius:4px;padding:20px 16px;">
+          <div style="font-size:.75rem;letter-spacing:2px;color:var(--rd);margin-bottom:4px;font-family:monospace;">⚠ REPORT BUG</div>
+          <div style="font-size:.68rem;color:var(--t2);margin-bottom:14px;">سيتم إرسال التقرير إلى الدعم مباشرة</div>
+          <input id="bugTitle" placeholder="عنوان المشكلة..." style="width:100%;padding:11px;border-radius:3px;border:1px solid var(--b);background:#222;color:var(--t);outline:none;font-size:.85rem;margin-bottom:8px;font-family:'Cairo',sans-serif;">
+          <textarea id="bugDesc" placeholder="وصف المشكلة بالتفصيل..." rows="4" style="width:100%;padding:11px;border-radius:3px;border:1px solid var(--b);background:#222;color:var(--t);outline:none;font-size:.85rem;resize:none;font-family:'Cairo',sans-serif;margin-bottom:10px;"></textarea>
+          <a id="bugSend" href="#" class="am-ok" style="border-radius:3px;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:7px;" onclick="sendBug()">📤 إرسال التقرير</a>
+          <button onclick="closeBugReport()" style="width:100%;padding:9px;border-radius:3px;border:1px solid var(--b);background:transparent;color:var(--t2);font-size:.82rem;cursor:pointer;font-family:'Cairo',sans-serif;">إلغاء</button>
+        </div>
+      </div>
+      <div class="sl">سجل التحديثات</div>
+      <div class="card">
+        <div class="card-bd">
+          <div class="tl">
+            <div class="tli"><div class="tl-left"><div class="dot" style="background:var(--yw);box-shadow:0 0 6px rgba(255,214,0,.5);"></div><div class="line"></div></div><div style="width:100%">
+              <div class="acc-hd" onclick="tog('u22')" style="border-bottom:none;padding:0 0 4px;">
+                <div><div class="tl-v" style="color:var(--yw);">UPDATE V2.3 PRO ♕ ◄</div><div class="tl-t">🏆 تحديث الأسطورة — MRF Technology</div></div>
+                <span class="acc-arrow" id="arr-u22">►</span>
+              </div>
+              <div id="u22" style="display:none;">
+                <div class="acc-feat">🏢 الموقع أصبح رسمياً تحت مظلة <strong style="color:var(--or);">MRF Technology</strong></div>
+                <div class="acc-feat">🔥 إضافة 8 تطبيقات جديدة: Blockman Go، Free Fire، PUBG، SoloLearn، TrebEdit، Termux، WPS، ZArchiver</div>
+                <div class="acc-feat">🎨 شعار MRF Technology الجديد في كل أقسام الموقع</div>
+                <div class="acc-feat">🔔 نظام إشعارات محدّث يعكس هوية الشركة</div>
+                <div class="acc-feat">🌐 رابط رسمي جديد للموقع على GitHub</div>
+                <div class="acc-feat">🗑️ حذف نظام الأدمن القديم وتنظيف الكود</div>
+                <div class="acc-feat">📸 حسابات التواصل محدّثة: @znrt_x / @m.rf0.4</div>
+                <div class="acc-feat">⚡ أداء أسرع وكود أخف بنسبة 91%</div>
+              </div>
+            </div></div>
+            <div class="tli"><div class="tl-left"><div class="dot"></div><div class="line"></div></div><div style="width:100%">
+              <div class="acc-hd" onclick="tog('u21')" style="border-bottom:none;padding:0 0 4px;">
+                <div><div class="tl-v">UPDATE V2.1 ◄</div><div class="tl-t">⚡ تحديث محسّن</div></div>
+                <span class="acc-arrow" id="arr-u21">►</span>
+              </div>
+              <div id="u21" style="display:none;">
+                <div class="acc-feat">إضافة Gringo XP و Minecraft Mods و Score Hero MOD</div>
+                <div class="acc-feat">FF Zit متاح قريباً لأعضاء VIP</div>
+                <div class="acc-feat">تحسين الإشعارات وإضافة VIP badge</div>
+                <div class="acc-feat">ID اللعبة: <span style="color:var(--or);font-family:monospace;">8726558110</span></div>
+              </div>
+            </div></div>
+            <div class="tli"><div class="tl-left"><div class="dot old"></div><div class="line"></div></div><div style="width:100%">
+              <div class="acc-hd" onclick="tog('u20')" style="border-bottom:none;padding:0 0 4px;">
+                <div><div class="tl-v old">UPDATE V2 ◄</div><div class="tl-t">🚀 تحديث الثورة</div></div>
+                <span class="acc-arrow" id="arr-u20">►</span>
+              </div>
+              <div id="u20" style="display:none;">
+                <div class="acc-feat">تصميم جديد كلياً</div>
+                <div class="acc-feat">Burger Menu جانبي</div>
+                <div class="acc-feat">أدمن متطور مع تتبع الزوار</div>
+                <div class="acc-feat">أوقات الصلاة تلقائياً</div>
+              </div>
+            </div></div>
+            <div class="tli"><div class="tl-left"><div class="dot old"></div><div class="line"></div></div><div style="width:100%">
+              <div class="acc-hd" onclick="tog('u19')" style="border-bottom:none;padding:0 0 4px;">
+                <div><div class="tl-v old">V1.9</div><div class="tl-t">🚀 تحديث الطيران</div></div>
+                <span class="acc-arrow" id="arr-u19">►</span>
+              </div>
+              <div id="u19" style="display:none;">
+                <div class="acc-feat">سرعة وأداء فائق على جميع الأجهزة</div>
+              </div>
+            </div></div>
+            <div class="tli"><div class="tl-left"><div class="dot old"></div><div class="line"></div></div><div style="width:100%">
+              <div class="acc-hd" onclick="tog('u15')" style="border-bottom:none;padding:0 0 4px;">
+                <div><div class="tl-v old">V1.5</div><div class="tl-t">♕ تحديث الامبرطور</div></div>
+                <span class="acc-arrow" id="arr-u15">►</span>
+              </div>
+              <div id="u15" style="display:none;">
+                <div class="acc-feat">واجهة مجددة بالكامل</div>
+                <div class="acc-feat">تتبع الزوار وأدمن سري</div>
+              </div>
+            </div></div>
+            <div class="tli"><div class="tl-left"><div class="dot old"></div><div class="line"></div></div><div style="width:100%">
+              <div class="acc-hd" onclick="tog('u12')" style="border-bottom:none;padding:0 0 4px;">
+                <div><div class="tl-v old">V1.2</div><div class="tl-t">🎨 تحديث القدوة</div></div>
+                <span class="acc-arrow" id="arr-u12">►</span>
+              </div>
+              <div id="u12" style="display:none;">
+                <div class="acc-feat">تصميم محسّن وألوان متعددة</div>
+              </div>
+            </div></div>
+            <div class="tli"><div class="tl-left"><div class="dot old"></div><div class="line"></div></div><div style="width:100%">
+              <div class="acc-hd" onclick="tog('u10')" style="border-bottom:none;padding:0 0 4px;">
+                <div><div class="tl-v old">V1.0</div><div class="tl-t">🌱 تحديث الميلاد</div></div>
+                <span class="acc-arrow" id="arr-u10">►</span>
+              </div>
+              <div id="u10" style="display:none;">
+                <div class="acc-feat">أول إصدار رسمي</div>
+              </div>
+            </div></div>
+            <div class="tli"><div class="tl-left"><div class="dot beta"></div></div><div><div class="tl-v beta">BETA</div><div class="tl-t">🧪 تحديث المختبر</div><div class="tl-d">النسخة التجريبية الأولى</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4: ABOUT -->
+    <div class="pg" id="p4">
+      <div class="pg-title">عن المطور</div>
+      <div class="card hl" style="text-align:center;padding:20px 16px;">
+        <div style="font-family:'Cairo',sans-serif;font-size:1.6rem;font-weight:900;letter-spacing:3px;background:linear-gradient(135deg,#ff6b2b,#ffb347);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-align:center;padding:10px 0;filter:drop-shadow(0 0 12px rgba(255,107,43,.5));">MRF Technology</div>
+        <div style="font-weight:900;font-size:.92rem;margin-bottom:3px;">Marwan Eroufel</div>
+        <div style="font-size:.7rem;color:var(--t2);">Technical Math — Sidi Bel Abbès 🇩🇿</div>
+      </div>
+      
+      <div class="sl">تواصل</div>
+      <a href="https://www.instagram.com/znrt_x" class="lnk hl"><div class="lnk-l"><div class="lnk-ic" style="background:rgba(188,24,136,.14);">📷</div><div><div>Instagram</div><div class="lnk-sub">@znrt_x / @m.rf0.4</div></div></div><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" opacity=".3"><path d="m15 18-6-6 6-6"/></svg></a>
+      <a href="mailto:Pokimarwan@gmail.com" class="lnk hl"><div class="lnk-l"><div class="lnk-ic" style="background:rgba(66,133,244,.14);">📧</div><div><div>البريد الإلكتروني</div><div class="lnk-sub">Pokimarwan@gmail.com</div></div></div><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" opacity=".3"><path d="m15 18-6-6 6-6"/></svg></a>
+      <a href="https://www.reddit.com/user/m-rf_" target="_blank" class="lnk hl"><div class="lnk-l"><div class="lnk-ic" style="background:rgba(255,69,0,.14);">🤖</div><div><div>Reddit</div><div class="lnk-sub">u/m-rf_</div></div></div><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" opacity=".3"><path d="m15 18-6-6 6-6"/></svg></a>
+      <a href="https://www.tiktok.com/@m.rf0.9" class="lnk hl"><div class="lnk-l"><div class="lnk-ic" style="background:rgba(255,255,255,.05);">🎵</div><div><div>TikTok</div><div class="lnk-sub">@m.rf0.9</div></div></div><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" opacity=".3"><path d="m15 18-6-6 6-6"/></svg></a>
+      <a href="https://youtube.com/@mrf_01_00" class="lnk hl"><div class="lnk-l"><div class="lnk-ic" style="background:rgba(255,0,0,.12);">▶</div><div><div>YouTube</div><div class="lnk-sub">@mrf_01_00</div></div></div><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" opacity=".3"><path d="m15 18-6-6 6-6"/></svg></a>
+      <a href="https://github.com/d-mrf" class="lnk hl"><div class="lnk-l"><div class="lnk-ic" style="background:rgba(255,255,255,.05);">💻</div><div><div>GitHub</div><div class="lnk-sub">d-mrf</div></div></div><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" opacity=".3"><path d="m15 18-6-6 6-6"/></svg></a>
+      <div class="lnk hl" style="cursor:default;"><div class="lnk-l"><div class="lnk-ic" style="background:rgba(88,101,242,.15);">💬</div><div><div>Discord</div><div class="lnk-sub">marwanmrf</div></div></div></div>
+      <div class="lnk hl" style="cursor:default;"><div class="lnk-l"><div class="lnk-ic" style="background:rgba(255,61,0,.13);">🔥</div><div><div>ID Free Fire</div><div class="lnk-sub" style="font-family:monospace;letter-spacing:1px;">8726558110</div></div></div><span class="chip cp-or">ID</span></div>
+      <div class="mrf-footer">© 2026 <span>MRF Technology</span> — All rights reserved</div>
+  </div>
+
+  </div>
+</div>
+
+<!-- ISTIGHFAR POPUP -->
+<div class="ist-pop" id="ist">🤲 استغفر الله العظيم وأتوب إليه</div>
+
+<script>
+var VK='mrfV2',vs=Date.now();
+
+// ── SPLASH ──
+window.addEventListener('load',function(){
+  setTimeout(function(){
+    var s=document.getElementById('SPL');
+    s.classList.add('hide');
+    setTimeout(function(){s.style.display='none';},500);
+  },2000);
+});
+
+// ── HAPTIC ──
+function hap(){try{if(navigator.vibrate)navigator.vibrate(8);}catch(e){}}
+document.addEventListener('click',function(e){
+  if(e.target.closest('button,a,.tog,.lnk,.dr-item,.acc-hd'))hap();
+});
+
+// ── SCROLL TOP ──
+var _appEl=null;
+function initScroll(){
+  _appEl=document.getElementById('pages');
+  if(!_appEl)return;
+  _appEl.addEventListener('scroll',function(){
+    var btn=document.getElementById('scrollTop');
+    if(_appEl.scrollTop>200)btn.classList.add('show');
+    else btn.classList.remove('show');
+  });
+}
+function scrollAppTop(){
+  if(_appEl)_appEl.scrollTo({top:0,behavior:'smooth'});
+}
+window.addEventListener('load',initScroll);
+
+// ── VISITOR COUNTER ──
+(function(){
+  try{
+    var v=parseInt(localStorage.getItem('mrf_visits')||'0')+1;
+    localStorage.setItem('mrf_visits',v);
+    localStorage.setItem('mrf_last',new Date().toLocaleDateString('ar-DZ'));
+  }catch(e){}
+})();
+
+// ── PWA INSTALL ──
+var _pwaEvt=null;
+window.addEventListener('beforeinstallprompt',function(e){
+  e.preventDefault();_pwaEvt=e;
+  setTimeout(function(){
+    var b=document.getElementById('instBanner');
+    if(b)b.style.display='flex';
+  },3000);
+});
+function installPWA(){
+  if(!_pwaEvt)return;
+  _pwaEvt.prompt();
+  _pwaEvt.userChoice.then(function(){
+    document.getElementById('instBanner').style.display='none';
+    _pwaEvt=null;
+  });
+}
+
+// ── PROTECT ──
+document.addEventListener('keydown',function(e){
+  if(e.key==='F12'||(e.ctrlKey&&e.shiftKey&&['I','J','C'].includes(e.key))||(e.ctrlKey&&e.key==='U')){e.preventDefault();}
+});
+document.addEventListener('contextmenu',function(e){e.preventDefault();});
+var T=['المنزل','الأحداث','الإعدادات','التحديثات','عن المطور'];
+var pgs=document.querySelectorAll('.pg');
+var drs=document.querySelectorAll('.dr-item');
+
+// ── VISITOR DISPLAY ──
+function loadVisits(){
+  try{
+    var v=localStorage.getItem('mrf_visits')||'1';
+    var l=localStorage.getItem('mrf_last')||'—';
+    var vc=document.getElementById('visitCount');
+    var lv=document.getElementById('lastVisit');
+    if(vc)vc.textContent=v+' مرة';
+    if(lv)lv.textContent=l;
+  }catch(e){}
+}
+window.addEventListener('load',loadVisits);
+
+// ── DRAWER ──
+function openDrawer(){
+  document.getElementById('drawer').classList.add('open');
+  document.getElementById('drawer-overlay').classList.add('on');
+  document.getElementById('burger').classList.add('open');
+}
+function closeDrawer(){
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('drawer-overlay').classList.remove('on');
+  document.getElementById('burger').classList.remove('open');
+}
+
+// ── NAV ──
+function go(i){
+  pgs.forEach(function(p,x){p.classList.toggle('on',x===i);});
+  drs.forEach(function(d,x){d.classList.toggle('on',x===i);});
+  closeDrawer();
+}
+
+// ── ENTER APP ──
+function goIn(){
+  var w=document.getElementById('W');
+  w.style.transition='opacity .3s';w.style.opacity='0';
+  setTimeout(function(){w.style.display='none';document.getElementById('A').style.display='flex';},300);
+}
+
+// ── SETTINGS ──
+function toggleMode(el){
+  el.classList.toggle('on');
+  document.body.classList.toggle('light');
+  try{localStorage.setItem('mrfM',document.body.classList.contains('light')?'1':'0');}catch(e){}
+}
+function aC(c,el){
+  document.documentElement.style.setProperty('--or',c);
+  document.querySelectorAll('[onclick^="aC"]').forEach(function(s){s.style.borderColor='transparent';});
+  el.style.borderColor='white';
+  try{localStorage.setItem('mrfC',c);}catch(e){}
+}
+function clrC(){if(confirm('مسح؟')){try{localStorage.removeItem(VK);}catch(e){}alert('تم ✓');}}
+
+// light mode CSS
+var lStyle=document.createElement('style');
+lStyle.textContent='body.light{background:#f5efe8;color:#1a1a1a;}.light .hd,.light .card,.light .lnk,.light .act,.light .cmp,.light .help,.light .prayer,.light .stb{background:#ebe4da;border-color:#ccc0b0;}.light .rk,.light .t2,.light .lnk-sub,.light .tl-d,.light .cmp-d,.light .help-d{color:#666;}.light .bk{background:#ebe4da;}.light .am{background:#ebe4da;}.light input{background:#e0d9d0;border-color:#bbb;color:#111;}.light .am-i{background:#e0d9d0;}';
+document.head.appendChild(lStyle);
+
+// ── DEVICE ──
+function dDv(){var u=navigator.userAgent;if(/iPad|tablet/i.test(u))return'Tablet';if(/Mobi|Android|iPhone/i.test(u))return'Mobile';return'Desktop';}
+function dOs(){var u=navigator.userAgent;if(/Windows NT 10/i.test(u))return'Win10/11';if(/Android/i.test(u)){var m=u.match(/Android ([\d.]+)/);return'Android '+(m?m[1]:'');}if(/iPhone|iPad/i.test(u)){var m2=u.match(/OS ([\d_]+)/);return'iOS '+(m2?m2[1].replace(/_/g,'.'):'');}if(/Mac/i.test(u))return'macOS';if(/Linux/i.test(u))return'Linux';return'Unknown';}
+function dBr(){var u=navigator.userAgent;if(/Edg\//i.test(u))return'Edge';if(/OPR|Opera/i.test(u))return'Opera';if(/Chrome/i.test(u))return'Chrome';if(/Firefox/i.test(u))return'Firefox';if(/Safari/i.test(u))return'Safari';return'Unknown';}
+
+// ── TABS ──
+function tb(t){
+  document.getElementById('TG').style.display=t==='g'?'block':'none';
+  document.getElementById('TA').style.display=t==='a'?'block':'none';
+  document.getElementById('bg').classList.toggle('on',t==='g');
+  document.getElementById('ba').classList.toggle('on',t==='a');
+}
+
+// ── ISTIGHFAR ──
+function showIst(){
+  var el=document.getElementById('ist');
+  el.classList.add('show');
+  setTimeout(function(){el.classList.remove('show');},4000);
+}
+setInterval(showIst,10*60*1000);
+
+// ── PRAYER TIMES ──
+(function(){
+  try{
+    var h=new Intl.DateTimeFormat('ar-SA-u-ca-islamic',{day:'numeric',month:'long',year:'numeric'}).format(new Date());
+    var hEl=document.getElementById('hijri');if(hEl)hEl.textContent=h;
+  }catch(e){}
+  fetch('https://api.aladhan.com/v1/timingsByCity?city=Sidi+Bel+Abbes&country=Algeria&method=2')
+    .then(function(r){return r.json();})
+    .then(function(d){
+      var t=d.data.timings;
+      var m={'Sunrise':'pt-sr','Dhuhr':'pt-zh','Asr':'pt-as','Maghrib':'pt-mg','Isha':'pt-is'};
+      Object.keys(m).forEach(function(k){var el=document.getElementById(m[k]);if(el&&t[k])el.textContent=t[k];});
+    }).catch(function(){});
+})();
+
+// ── RESTORE SETTINGS ──
+(function(){
+  try{if(localStorage.getItem('mrfM')==='1'){document.body.classList.add('light');var t=document.getElementById('modeT');if(t)t.classList.remove('on');}}catch(e){}
+  try{var c=localStorage.getItem('mrfC');if(c)document.documentElement.style.setProperty('--or',c);}catch(e){}
+})();
+
+
+// ── ACCORDION ──
+function tog(id){
+  var el=document.getElementById(id);
+  var arr=document.getElementById('arr-'+id);
+  if(!el)return;
+  var open=el.style.display!=='none'&&el.style.display!=='';
+  el.style.display=open?'none':'block';
+  if(arr)arr.textContent=open?'▶':'▼';
+}
+
+// ── NOTIFICATIONS ──
+var NOTIFS=[
+  {ic:'🏢',t:'تغيير ملكية رسمي',s:'تم الانتقال الرسمي إلى شركة MRF Technology',unread:true},
+  {ic:'🚀',t:'عهد جديد مع MRF Technology',s:'جميع الخدمات والمشاريع أصبحت تحت مظلة الشركة',unread:true},
+  {ic:'✅',t:'الموقع الآن تابع لـ MRF Technology',s:'نعمل على تطوير أفضل تحت الاسم الجديد',unread:true},
+];
+function renderNotifs(){
+  var el=document.getElementById('notif-list');
+  if(!el)return;
+  var unread=NOTIFS.filter(function(n){return n.unread;}).length;
+  var cnt=document.getElementById('notif-count');
+  if(cnt){cnt.textContent=unread;cnt.style.display=unread>0?'flex':'none';}
+  el.innerHTML=NOTIFS.map(function(n,i){
+    return'<div class="notif-item'+(n.unread?' unread':'')+'" onclick="markRead('+i+')">'+
+    '<div class="notif-ic" style="background:rgba(255,107,43,.12);">'+n.ic+'</div>'+
+    '<div class="notif-txt"><div class="nt">'+n.t+'</div><div class="ns">'+n.s+'</div></div>'+
+    (n.unread?'<div style="width:7px;height:7px;border-radius:50%;background:var(--or);flex-shrink:0;margin-top:5px;"></div>':'')+
+    '</div>';
+  }).join('');
+}
+function markRead(i){NOTIFS[i].unread=false;renderNotifs();}
+function clearNotifs(){NOTIFS.forEach(function(n){n.unread=false;});renderNotifs();}
+function toggleNotif(){
+  var p=document.getElementById('notif-panel');
+  if(p){p.classList.toggle('on');if(p.classList.contains('on'))renderNotifs();}
+}
+document.addEventListener('click',function(e){
+  var p=document.getElementById('notif-panel');
+  var b=document.getElementById('notif-bell');
+  if(p&&b&&p.classList.contains('on')&&!p.contains(e.target)&&!b.contains(e.target))p.classList.remove('on');
+});
+renderNotifs();
+
+// ── NETWORK & VPN DETECTION ──
+var _netOverlay=null;
+function _showNetMsg(type){
+  if(!_netOverlay){
+    _netOverlay=document.createElement('div');
+    _netOverlay.style.cssText='position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.97);display:flex;align-items:center;justify-content:center;padding:24px;';
+    document.body.appendChild(_netOverlay);
+  }
+  var isVPN=type==='vpn';
+  _netOverlay.innerHTML='<div style="text-align:center;max-width:300px;">'
+    +'<div style="font-size:3rem;margin-bottom:16px;">'+(isVPN?'🔒':'📡')+'</div>'
+    +'<div style="font-family:monospace;font-size:.6rem;letter-spacing:4px;color:'+(isVPN?'#ff6b2b':'#ef4444')+';margin-bottom:8px;text-transform:uppercase;">'+(isVPN?'VPN Detected':'No Connection')+'</div>'
+    +'<div style="font-size:1rem;font-weight:900;color:#fff;margin-bottom:10px;">'+(isVPN?'Oops! You are using a VPN':'Oops! Check your internet')+'</div>'
+    +'<div style="font-size:.75rem;color:rgba(255,255,255,.5);line-height:1.6;">'+(isVPN?'You are using a VPN.<br>Please disable it and try again.':'No internet connection detected.<br>Please check your network and try again.')+'</div>'
+    +(isVPN?''+'<button onclick="_retryNet()" style="margin-top:20px;padding:10px 24px;background:linear-gradient(135deg,#ff6b2b,#ffb347);border:none;border-radius:4px;color:#fff;font-weight:700;font-size:.82rem;cursor:pointer;letter-spacing:1px;">Try Again</button>'
+           :'<button onclick="_retryNet()" style="margin-top:20px;padding:10px 24px;background:linear-gradient(135deg,#ff6b2b,#ffb347);border:none;border-radius:4px;color:#fff;font-weight:700;font-size:.82rem;cursor:pointer;letter-spacing:1px;">Try Again</button>')
+    +'<div style="margin-top:12px;font-size:.55rem;color:rgba(255,179,71,.4);letter-spacing:2px;font-family:monospace;">MRF Technology</div>'
+    +'</div>';
+  _netOverlay.style.display='flex';
+}
+function _hideNetMsg(){
+  if(_netOverlay)_netOverlay.style.display='none';
+}
+function _retryNet(){
+  _hideNetMsg();
+  _checkNet();
+}
+function _checkVPN(cb){
+  // فحص VPN عبر WebRTC leak detection
+  try{
+    var pc=new RTCPeerConnection({iceServers:[]});
+    pc.createDataChannel('');
+    pc.createOffer().then(function(o){pc.setLocalDescription(o);});
+    pc.onicecandidate=function(e){
+      if(!e||!e.candidate)return;
+      var ip=e.candidate.candidate.match(/([0-9]{1,3}\.){3}[0-9]{1,3}/);
+      if(ip){
+        var parts=ip[0].split('.');
+        var isPrivate=(parts[0]==='10')||(parts[0]==='192'&&parts[1]==='168')||(parts[0]==='172'&&parts[1]>=16&&parts[1]<=31);
+        // إذا الـ IP مش private يعني VPN محتمل
+        if(!isPrivate){cb(true);}else{cb(false);}
+        pc.close();
+      }
+    };
+    setTimeout(function(){cb(false);},2500);
+  }catch(e){cb(false);}
+}
+function _checkNet(){
+  if(!navigator.onLine){_showNetMsg('offline');return;}
+  _hideNetMsg();
+}
+window.addEventListener('online',function(){_checkNet();});
+window.addEventListener('offline',function(){_showNetMsg('offline');});
+// فحص عند التحميل
+window.addEventListener('load',function(){
+  _checkNet();
+});
+
+// ── BUG REPORT ──
+function openBugReport(){
+  var m=document.getElementById('BRM');
+  if(m){m.style.display='flex';document.getElementById('bugTitle').value='';document.getElementById('bugDesc').value='';}
+}
+function closeBugReport(){
+  var m=document.getElementById('BRM');if(m)m.style.display='none';
+}
+function sendBug(){
+  var t=document.getElementById('bugTitle').value.trim();
+  var d=document.getElementById('bugDesc').value.trim();
+  if(!t||!d){alert('الرجاء ملء جميع الحقول');return false;}
+  var sub=encodeURIComponent('🐛 Bug Report: '+t);
+  var body=encodeURIComponent('العنوان: '+t+'\n\nالوصف:\n'+d+'\n\n---\nالجهاز: '+navigator.userAgent);
+  window.location.href='mailto:Pokimarwan@gmail.com?subject='+sub+'&body='+body;
+  closeBugReport();
+}
+
+</script>
+</body>
+</html>
